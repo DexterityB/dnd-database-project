@@ -2,51 +2,79 @@ import mysql.connector
 from mysql.connector import Error
 
 def create_connection():
-    """Create database connection"""
+    '''Connect to Database'''
     try:
         connection = mysql.connector.connect(
             host='localhost',
-            database='your_database',
+            database='dnd_database',
             user='root',
             password='password'
         )
+
         if connection.is_connected():
             return connection
-    except Error as e:
-        print(f"Error: {e}")
-        return None
 
-def add_runner(connection, name, country):
-    """Add a new speedrunner to the database"""
+    except Error as e:
+        print(f'❌ Error: "{e}" ❌')
+        return False
+
+def add_character(connection, name, dnd_class, description, level):
+    '''Add a character to the database'''
     try:
         cursor = connection.cursor()
-        query = "INSERT INTO runners (name, country) VALUES (%s, %s)"
-        cursor.execute(query, (name, country))
+        query = "INSERT INTO characters (name, class, level, description) VALUES (%s, %s, %s, %s)"
+        cursor.execute(query, (name, dnd_class, level, description))
         connection.commit()
-        print(f"✅ Added runner: {name}")
+        print(f'✅ "{name}" added to database ✅')
+
     except Error as e:
-        print(f"❌ Error: {e}")
+        print(f'❌ Error: "{e}" ❌')
+        
+    finally:
+        return None
+
+def view_table(connection, table):
+    try:
+        cursor = connection.cursor()
+        query = f"SELECT * FROM {table}"
+        cursor.execute(query)
+        table = cursor.fetchall()
+        for row in table:
+            print(row)
+        #connection.commit()
+
+    except Error as e:
+        print(f'❌ Error: "{e}" ❌')
+
+    finally:
+        return None
 
 def main():
-    print("🎮 Speedrun Database Manager")
-    print("=" * 40)
+    print("🗡️  D&D Database Manager 🐉")
+    print("=" * 26)
     
     connection = create_connection()
     if not connection:
-        return
+        return None
     
     while True:
-        print("\n1. Add Runner")
-        print("2. View All Runners")
+        print("\n1. Add Character")
+        print("2. View All Characters")
         print("3. Exit")
         
-        choice = input("\nChoice: ")
+        select = input("Selection: ")
         
-        if choice == "1":
-            name = input("Runner name: ")
-            country = input("Country: ")
-            add_runner(connection, name, country)
-        elif choice == "3":
+        if select == "1":
+            name = input("Name: ")
+            dnd_class = input("Class: ")
+            level = input("Level: ")
+            description = input("Description: ")
+            add_character(connection, name, dnd_class, description, level)
+
+        elif select == "2":
+            view_table(connection, 'characters')
+
+        elif select == "3":
             break
     
     connection.close()

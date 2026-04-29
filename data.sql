@@ -96,7 +96,7 @@ INSERT IGNORE INTO quests (npc_id, objective, details, start_date, completion_da
 (9, 'Repair golem core', 'Fix ancient dwarven construct', '2026-04-10', NULL, 'Mechanical companion'),
 (10, 'Deliver secret message', 'Covert delivery across kingdom', '2026-04-12', '2026-04-13', 'Encrypted reward chest');
 
-INSERT IGNORE INTO skills (name, description, effects) VALUES
+INSERT IGNORE INTO skills (name, effects) VALUES
 ('Perception', 'Spotting hidden enemies, hearing conversations, or finding hidden doors'),
 ('Stealth', 'Hiding from enemies, moving silently, or sneaking past guards'),
 ('Athletics', 'Boost climbing, jumping, and grappling success'),

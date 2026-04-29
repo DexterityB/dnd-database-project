@@ -17,7 +17,6 @@ CREATE TABLE IF NOT EXISTS stats (
     intelligence INT,
     wisdom INT,
     charisma INT,
-    description VARCHAR(255),
     FOREIGN KEY (character_id) 
         REFERENCES characters(id)
         ON DELETE CASCADE

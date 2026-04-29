@@ -1,5 +1,6 @@
 import mysql.connector
 from mysql.connector import Error
+from tabulate import tabulate
 
 def create_connection():
     '''Connect to Database'''
@@ -25,24 +26,12 @@ def view_table(connection, table):
         cursor.execute(query)
         table = cursor.fetchall()
 
-        sec_len = 0
-        for num in range(len(table)):
-            first_len = sec_len
-            try:
-                sec_len = len(str(table[num]))
-            except:
-                sec_len = 0
+        headers = [val[0].upper() for val in cursor.description]
+        #print(headers)
+        #headers = ["Id", "Name", "Class", "Level", "Description"]
+        print(tabulate(table, headers = headers, tablefmt = "grid"))
 
-            if first_len > sec_len:
-                print("-" * first_len)
-            else:
-                print("-" * sec_len)
 
-            print("|", end = " ")
-            for value in table[num]:
-                print(value, end = " | ")
-            print("")
-        print("-" * sec_len)
 
     except Error as e:
         print(f'❌ Error: "{e}" ❌')

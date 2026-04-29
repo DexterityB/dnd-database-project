@@ -83,10 +83,12 @@ CREATE TABLE IF NOT EXISTS quests (
 );
 
 CREATE TABLE IF NOT EXISTS skills (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    character_id INT,
     name VARCHAR(50) NOT NULL,
-    description VARCHAR(255),
-    effects VARCHAR(255)
+    effects VARCHAR(255),
+    FOREIGN KEY (character_id) 
+        REFERENCES characters(id)
+        ON DELETE CASCADE
 );
 
 SELECT * FROM characters;

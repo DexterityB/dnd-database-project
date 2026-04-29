@@ -26,7 +26,9 @@ CREATE TABLE IF NOT EXISTS spells (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     description VARCHAR(255),
-    level INT
+    level INT,
+    -- Use VARCHAR instead of INT due to damage being dice based (ex. d4, 2d6) 
+    damage VARCHAR(50)
 );
 
 CREATE TABLE IF NOT EXISTS items (
@@ -77,6 +79,15 @@ CREATE TABLE IF NOT EXISTS quests (
     rewards VARCHAR(255),
     FOREIGN KEY (npc_id) 
         REFERENCES npcs(id)
+        ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS skills (
+    character_id INT,
+    name VARCHAR(50) NOT NULL,
+    effects VARCHAR(255),
+    FOREIGN KEY (character_id) 
+        REFERENCES characters(id)
         ON DELETE CASCADE
 );
 

@@ -97,13 +97,13 @@ INSERT IGNORE INTO quests (npc_id, objective, details, start_date, completion_da
 (10, 'Deliver secret message', 'Covert delivery across kingdom', '2026-04-12', '2026-04-13', 'Encrypted reward chest');
 
 INSERT IGNORE INTO skills (name, description, effects) VALUES
-('Perception', 'Awareness of surroundings and hidden details', 'Spotting hidden enemies, hearing conversations, or finding hidden doors'),
-('Stealth', 'Ability to move unseen and unheard', 'Hiding from enemies, moving silently, or sneaking past guards'),
-('Athletics', 'Physical strength and endurance', 'Boost climbing, jumping, and grappling success'),
-('Persuasion', 'Influence others through charm or logic', 'Negotiating, charming, or convincing NPCs to help'),
-('Arcana', 'Knowledge of magical lore and spells', 'Identifying spells, magical items, or arcane lore'),
-('Insight', 'Read intentions and emotions of others', 'Detect lies and hidden motives'),
-('Investigation', 'Analyze clues and deduce information', 'Searching for clues, deducing locations, or analyzing evidence'),
-('Acrobatics', 'Agility and balance', 'Maintaining balance, escaping restraints, or performing flips.'),
-('Intimidation', 'Coerce or frighten others', 'Using threats to coerce NPCs.'),
-('Survival', 'Wilderness knowledge and tracking', 'Tracking enemies, foraging for food, or avoiding natural hazards');
+('Perception', 'Spotting hidden enemies, hearing conversations, or finding hidden doors'),
+('Stealth', 'Hiding from enemies, moving silently, or sneaking past guards'),
+('Athletics', 'Boost climbing, jumping, and grappling success'),
+('Persuasion', 'Negotiating, charming, or convincing NPCs to help'),
+('Arcana', 'Identifying spells, magical items, or arcane lore'),
+('Insight', 'Detect lies and hidden motives'),
+('Investigation', 'Searching for clues, deducing locations, or analyzing evidence'),
+('Acrobatics', 'Maintaining balance, escaping restraints, or performing flips.'),
+('Intimidation', 'Using threats to coerce NPCs.'),
+('Survival', 'Tracking enemies, foraging for food, or avoiding natural hazards');

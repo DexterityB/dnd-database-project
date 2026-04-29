@@ -24,17 +24,17 @@ INSERT IGNORE INTO stats (character_id, strength, dexterity, constitution, intel
 (9, 20, 11, 18, 12, 14, 15),
 (10, 8, 17, 11, 15, 13, 19);
 
-INSERT IGNORE INTO spells (name, description, level) VALUES
-('Fireball', 'Explosive burst of fire', 3),
-('Magic Missile', 'Guaranteed arcane bolts', 1),
-('Heal', 'Restores health to allies', 2),
-('Lightning Bolt', 'High-voltage strike', 3),
-('Invisibility', 'Makes caster unseen', 2),
-('Frost Nova', 'Freezing area blast', 3),
-('Summon Wolf', 'Calls a spirit wolf', 2),
-('Charm Person', 'Influences humanoid minds', 1),
-('Meteor Strike', 'Massive celestial impact', 5),
-('Arcane Shield', 'Protective magical barrier', 2);
+INSERT IGNORE INTO spells (name, description, level, damage) VALUES
+('Fireball', 'Explosive burst of fire', 3, '8d6 fire'),
+('Magic Missile', 'Guaranteed arcane bolts', 1, '3d4+3 force'),
+('Heal', 'Restores health to allies', 2, NULL),
+('Lightning Bolt', 'High-voltage strike', 3, '8d6 lightning'),
+('Invisibility', 'Makes caster unseen', 2, NULL),
+('Frost Nova', 'Freezing area blast', 3, '6d6 cold'),
+('Summon Wolf', 'Calls a spirit wolf', 2, NULL),
+('Charm Person', 'Influences humanoid minds', 1, NULL),
+('Meteor Strike', 'Massive celestial impact', 5, '12d10 fire/bludgeoning'),
+('Arcane Shield', 'Protective magical barrier', 2, NULL);
 
 INSERT IGNORE INTO items (name, description, effects) VALUES
 ('Sword of Dawn', 'Holy blade of light', '+5 vs undead'),
@@ -95,3 +95,15 @@ INSERT IGNORE INTO quests (npc_id, objective, details, start_date, completion_da
 (8, 'Sacred healing ritual', 'Gather herbs for temple ritual', '2026-04-05', '2026-04-06', 'Blessing'),
 (9, 'Repair golem core', 'Fix ancient dwarven construct', '2026-04-10', NULL, 'Mechanical companion'),
 (10, 'Deliver secret message', 'Covert delivery across kingdom', '2026-04-12', '2026-04-13', 'Encrypted reward chest');
+
+INSERT IGNORE INTO skills (name, description, effects) VALUES
+('Perception', 'Awareness of surroundings and hidden details', 'Spotting hidden enemies, hearing conversations, or finding hidden doors'),
+('Stealth', 'Ability to move unseen and unheard', 'Hiding from enemies, moving silently, or sneaking past guards'),
+('Athletics', 'Physical strength and endurance', 'Boost climbing, jumping, and grappling success'),
+('Persuasion', 'Influence others through charm or logic', 'Negotiating, charming, or convincing NPCs to help'),
+('Arcana', 'Knowledge of magical lore and spells', 'Identifying spells, magical items, or arcane lore'),
+('Insight', 'Read intentions and emotions of others', 'Detect lies and hidden motives'),
+('Investigation', 'Analyze clues and deduce information', 'Searching for clues, deducing locations, or analyzing evidence'),
+('Acrobatics', 'Agility and balance', 'Maintaining balance, escaping restraints, or performing flips.'),
+('Intimidation', 'Coerce or frighten others', 'Using threats to coerce NPCs.'),
+('Survival', 'Wilderness knowledge and tracking', 'Tracking enemies, foraging for food, or avoiding natural hazards');

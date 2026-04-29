@@ -1,53 +1,21 @@
-import mysql.connector
-from mysql.connector import Error
+from database import create_connection, view_table, insert_character, insert_stats
 
-def create_connection():
-    '''Connect to Database'''
-    try:
-        connection = mysql.connector.connect(
-            host='localhost',
-            database='dnd_database',
-            user='root',
-            password='password'
-        )
+def add_character():
+    name = input("Name: ")
+    dnd_class = input("Class: ")
+    level = input("Level: ")
+    description = input("Description: ")
+    id = insert_character(connection, name, dnd_class, description, level)
 
-        if connection.is_connected():
-            return connection
-
-    except Error as e:
-        print(f'❌ Error: "{e}" ❌')
-        return False
-
-def add_character(connection, name, dnd_class, description, level):
-    '''Add a character to the database'''
-    try:
-        cursor = connection.cursor()
-        query = "INSERT INTO characters (name, class, level, description) VALUES (%s, %s, %s, %s)"
-        cursor.execute(query, (name, dnd_class, level, description))
-        connection.commit()
-        print(f'✅ "{name}" added to database ✅')
-
-    except Error as e:
-        print(f'❌ Error: "{e}" ❌')
-        
-    finally:
-        return None
-
-def view_table(connection, table):
-    try:
-        cursor = connection.cursor()
-        query = f"SELECT * FROM {table}"
-        cursor.execute(query)
-        table = cursor.fetchall()
-        for row in table:
-            print(row)
-        #connection.commit()
-
-    except Error as e:
-        print(f'❌ Error: "{e}" ❌')
-
-    finally:
-        return None
+    auto = input("\nWould you like to input your statistics or randomize them automatically [manual/auto]: ").lower()
+    if auto == "manual":
+        strength = int(input("Strength: "))
+        dexterity = int(input("Dexterity: "))
+        constitution = int(input("Constitution: "))
+        intelligence = int(input("Intelligence: "))
+        wisdom = int(input("Wisdom: "))
+        charisma = int(input("Charisma: "))
+    insert_stats(connection, id, strength, dexterity, constitution, intelligence, wisdom, charisma)
 
 def main():
     print("🗡️  D&D Database Manager 🐉")
@@ -58,24 +26,23 @@ def main():
         return None
     
     while True:
-        print("\n1. Add Character")
-        print("2. View All Characters")
+        print("\n1. View Table")
+        print("2. Add Character")
         print("3. Exit")
         
         select = input("Selection: ")
         
-        if select == "1":
-            name = input("Name: ")
-            dnd_class = input("Class: ")
-            level = input("Level: ")
-            description = input("Description: ")
-            add_character(connection, name, dnd_class, description, level)
+        match select:
+            case "1":
+                table = input("Table name: ").lower()
+                print("")
+                view_table(connection, table)
 
-        elif select == "2":
-            view_table(connection, 'characters')
+            case "2":
+                add_character()
 
-        elif select == "3":
-            break
+            case "3":
+                break
     
     connection.close()
 

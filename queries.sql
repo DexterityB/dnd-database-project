@@ -1,19 +1,14 @@
 USE dnd_database;
 /*
-SET FOREIGN_KEY_CHECKS = 0;
-
-TRUNCATE TABLE inventory;
-TRUNCATE TABLE spells_learned;
-TRUNCATE TABLE stats;
-TRUNCATE TABLE quests;
-TRUNCATE TABLE spells;
-TRUNCATE TABLE items;
-TRUNCATE TABLE npcs;
-TRUNCATE TABLE characters;
-
-SET FOREIGN_KEY_CHECKS = 1;
+DROP TABLE inventory;
+DROP TABLE spells_learned;
+DROP TABLE stats;
+DROP TABLE quests;
+DROP TABLE spells;
+DROP TABLE items;
+DROP TABLE npcs;
+DROP TABLE characters;
 */
-
 SELECT * FROM characters;
 SELECT * FROM stats;
 SELECT * FROM spells;

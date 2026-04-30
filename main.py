@@ -34,9 +34,7 @@ def main():
         
         match select:
             case "1":
-                table = input("Table name: ").lower()
-                print("")
-                view_table(connection, table)
+                view_table(connection)
 
             case "2":
                 add_character()

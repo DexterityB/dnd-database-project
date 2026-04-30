@@ -19,19 +19,26 @@ def create_connection():
         print(f'❌ Error: "{e}" ❌')
         return False
 
-def view_table(connection, table):
+def view_table(connection):
     try:
         cursor = connection.cursor()
+        cursor.execute("SHOW TABLES")
+        tables = cursor.fetchall()
+        print("List of available tables: ", end = "")
+        options = []
+        for option in tables:
+            options.append(option[0])
+        print(options)
+
+        table = input("Table name: ").lower()
+        print("")
+
         query = f"SELECT * FROM {table}"
         cursor.execute(query)
         table = cursor.fetchall()
 
         headers = [val[0].upper() for val in cursor.description]
-        #print(headers)
-        #headers = ["Id", "Name", "Class", "Level", "Description"]
         print(tabulate(table, headers = headers, tablefmt = "grid"))
-
-
 
     except Error as e:
         print(f'❌ Error: "{e}" ❌')

@@ -1,6 +1,6 @@
 # D&D Database
 
-desc
+
 
 ## ERD
 
@@ -8,15 +8,39 @@ desc
 
 ## Installation
 
+1. git clone https://github.com/DexterityB/dnd-database-project.git
+
+2. cd dnd-database-project
+
+3. pip install mysql-connector-python
+
+4. pip install tabulate
 
 
 ## Usage 
+To run python menu
+
+1. python3 main.py
+
+To make docker container and create database
+
+1. docker run --name dnd-database   -e MYSQL_ROOT_PASSWORD=password   -p 3306:3306   -d mysql:latest
+
+2. docker start dnd-database
+
+3. docker exec -it final-project-db mysql -uroot -ppassword < schema.sql
+
+## Example Usage
 
 
 
-# Example Usage
+## Testing
 
+To add example data and see example queries
 
+1. docker exec -it final-project-db mysql -uroot -ppassword < data.sql
+
+2. docker exec -it final-project-db mysql -uroot -ppassword < queries.sql
 
 ## Table Descriptions
 

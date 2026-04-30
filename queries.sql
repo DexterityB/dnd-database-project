@@ -1,19 +1,34 @@
 USE dnd_database;
-/*
-DROP TABLE inventory;
-DROP TABLE spells_learned;
-DROP TABLE stats;
-DROP TABLE quests;
-DROP TABLE spells;
-DROP TABLE items;
-DROP TABLE npcs;
-DROP TABLE characters;
-*/
-SELECT * FROM characters;
-SELECT * FROM stats;
-SELECT * FROM spells;
-SELECT * FROM items;
-SELECT * FROM npcs;
-SELECT * FROM spells_learned;
-SELECT * FROM inventory;
-SELECT * FROM quests;
+
+SELECT name, class, level
+FROM characters
+WHERE level > 5;
+
+SELECT name, class, level
+FROM characters
+ORDER BY level DESC
+LIMIT 1;
+
+SELECT name, description, damage
+FROM spells
+WHERE level = 2;
+
+SELECT name, effects
+FROM items
+WHERE effects LIKE '%heal%';
+
+SELECT COUNT(*) AS total_characters
+FROM characters;
+
+SELECT character_id, strength
+FROM stats
+WHERE strength > 15;
+
+SELECT c.name, c.class, s.strength, s.dexterity
+FROM characters c
+JOIN stats s ON c.id = s.character_id;
+
+SELECT c.name AS character_name, i.name AS item, inv.quantity
+FROM characters c
+JOIN inventory inv ON c.id = inv.character_id
+JOIN items i ON inv.item_id = i.id;

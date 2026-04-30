@@ -24,7 +24,7 @@ def view_table(connection):
         cursor = connection.cursor()
         cursor.execute("SHOW TABLES")
         tables = cursor.fetchall()
-        print("List of available tables: ", end = "")
+        print("\nList of available tables: ", end = "")
         options = []
         for option in tables:
             options.append(option[0])
@@ -46,17 +46,24 @@ def view_table(connection):
     finally:
         return None
 
-def insert_character(connection, name, dnd_class, description, level):
-    '''Add a character to the database'''
+def add_data(connection, table, data, added, get_id = False):
+    '''Add a row of data to the database'''
     try:
         cursor = connection.cursor()
-        query = "INSERT INTO characters (name, class, level, description) VALUES (%s, %s, %s, %s)"
-        cursor.execute(query, (name, dnd_class, level, description))
-        connection.commit()
-        print(f'✅ "{name}" added to database ✅')
+        parameters = []
+        for value in data:
+            parameters.append('%s')
 
-        cursor.execute("SELECT id, name FROM characters WHERE name = %s", (name,))
-        id = cursor.fetchall()[0][0]
+        query = f"INSERT INTO {table} VALUES ({", ".join(parameters)})"
+        cursor.execute(query, data)
+        connection.commit()
+        print(f'✅ {added} added to database ✅')
+
+        if get_id:
+            cursor.execute("SELECT id, name FROM characters WHERE name = %s", (data[0],))
+            id = cursor.fetchall()[0][0]
+        else:
+            id = None
 
     except Error as e:
         print(f'❌ Error: "{e}" ❌')
@@ -65,15 +72,15 @@ def insert_character(connection, name, dnd_class, description, level):
     finally:
         return id
 
-def insert_stats(connection, id, strength, dexterity, constitution, intelligence, wisdom, charisma):
-    '''Add a character's stats to the database'''
+def delete_data(connection, table, id):
+    '''Delete a row of data from the database'''
     try:
         cursor = connection.cursor()
-        query = "INSERT INTO stats (character_id, strength, dexterity, constitution, intelligence, wisdom, charisma) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-        cursor.execute(query, (id, strength, dexterity, constitution, intelligence, wisdom, charisma))
+        query = f"DELETE FROM {table} WHERE ID = " + "%s"
+        cursor.execute(query, (id,))
         connection.commit()
-        print(f'✅ Stats added to database ✅')
-
+        print('✅ Successfly deleted data from database ✅')
+    
     except Error as e:
         print(f'❌ Error: "{e}" ❌')
         

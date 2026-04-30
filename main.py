@@ -1,11 +1,51 @@
-from database import create_connection, view_table, insert_character, insert_stats
+from database import create_connection, view_table, add_data, delete_data
 
-def add_character():
+def char_menu(connection):
+    print("\n🧙 Character Menu 👑")
+    print("=" * 20)
+
+    print("\n1. Add Character")
+    print("2. Update Character")
+    print("3. Delete Character")
+    select = input("Selection: ")
+    
+    match select:
+        case '1':
+            add_character(connection)
+
+        case '2':
+            return None
+
+        case '3':
+            id = int(input("Input Character ID: "))
+            delete_data(connection, 'characters', id)
+
+    return None
+
+
+
+def spell_menu(connection):
+    print("\n🪄  Spell Menu 📜")
+    print("=" * 16)
+    return None
+
+
+
+
+def quest_menu(connection):
+    print("\n🧭 Quest Menu 🗺️")
+    print("=" * 16)
+    return None
+
+
+
+
+def add_character(connection):
     name = input("Name: ")
     dnd_class = input("Class: ")
     level = input("Level: ")
     description = input("Description: ")
-    id = insert_character(connection, name, dnd_class, description, level)
+    id = add_data(connection, 'characters (name, class, level, description)', (name, dnd_class, level, description), name, True)
 
     auto = input("\nWould you like to input your statistics or randomize them automatically [manual/auto]: ").lower()
     if auto == "manual":
@@ -15,7 +55,7 @@ def add_character():
         intelligence = int(input("Intelligence: "))
         wisdom = int(input("Wisdom: "))
         charisma = int(input("Charisma: "))
-    insert_stats(connection, id, strength, dexterity, constitution, intelligence, wisdom, charisma)
+    add_data(connection, 'stats (character_id, strength, dexterity, constitution, intelligence, wisdom, charisma)', (id, strength, dexterity, constitution, intelligence, wisdom, charisma), name + "'s stats")
 
 def main():
     print("🗡️  D&D Database Manager 🐉")
@@ -27,19 +67,26 @@ def main():
     
     while True:
         print("\n1. View Table")
-        print("2. Add Character")
-        print("3. Exit")
-        
+        print("2. Character Menu")
+        print("3. Spell Menu")
+        print("4. Quest Menu")
+        print("5. Exit")
         select = input("Selection: ")
         
         match select:
-            case "1":
+            case '1':
                 view_table(connection)
 
-            case "2":
-                add_character()
+            case '2':
+                char_menu(connection)
 
-            case "3":
+            case '3':
+                spell_menu(connection)
+
+            case '4':
+                quest_menu(connection)
+
+            case '5':
                 break
     
     connection.close()

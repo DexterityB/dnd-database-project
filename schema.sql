@@ -11,12 +11,12 @@ CREATE TABLE IF NOT EXISTS characters (
 
 CREATE TABLE IF NOT EXISTS stats (
     character_id INT PRIMARY KEY,
-    strength INT,
-    dexterity INT,
-    constitution INT,
-    intelligence INT,
-    wisdom INT,
-    charisma INT,
+    strength INT CHECK (strength >= 1 AND strength <= 20),
+    dexterity INT CHECK (dexterity >= 1 AND dexterity <= 20),
+    constitution INT CHECK (constitution >= 1 AND constitution <= 20),
+    intelligence INT CHECK (intelligence >= 1 AND intelligence <= 20),
+    wisdom INT CHECK (wisdom >= 1 AND wisdom <= 20),
+    charisma INT CHECK (charisma >= 1 AND charisma <= 20),
     FOREIGN KEY (character_id) 
         REFERENCES characters(id)
         ON DELETE CASCADE

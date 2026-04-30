@@ -96,14 +96,14 @@ INSERT IGNORE INTO quests (npc_id, objective, details, start_date, completion_da
 (9, 'Repair golem core', 'Fix ancient dwarven construct', '2026-04-10', NULL, 'Mechanical companion'),
 (10, 'Deliver secret message', 'Covert delivery across kingdom', '2026-04-12', '2026-04-13', 'Encrypted reward chest');
 
-INSERT IGNORE INTO skills (name, effects) VALUES
-('Perception', 'Spotting hidden enemies, hearing conversations, or finding hidden doors'),
-('Stealth', 'Hiding from enemies, moving silently, or sneaking past guards'),
-('Athletics', 'Boost climbing, jumping, and grappling success'),
-('Persuasion', 'Negotiating, charming, or convincing NPCs to help'),
-('Arcana', 'Identifying spells, magical items, or arcane lore'),
-('Insight', 'Detect lies and hidden motives'),
-('Investigation', 'Searching for clues, deducing locations, or analyzing evidence'),
-('Acrobatics', 'Maintaining balance, escaping restraints, or performing flips.'),
-('Intimidation', 'Using threats to coerce NPCs.'),
-('Survival', 'Tracking enemies, foraging for food, or avoiding natural hazards');
+INSERT IGNORE INTO skills (character_id, name, effects) VALUES
+(1, 'Perception', 'Spotting hidden enemies, hearing conversations, or finding hidden doors'),
+(2, 'Stealth', 'Hiding from enemies, moving silently, or sneaking past guards'),
+(3, 'Athletics', 'Boost climbing, jumping, and grappling success'),
+(4, 'Persuasion', 'Negotiating, charming, or convincing NPCs to help'),
+(5, 'Arcana', 'Identifying spells, magical items, or arcane lore'),
+(6, 'Insight', 'Detect lies and hidden motives'),
+(7, 'Investigation', 'Searching for clues, deducing locations, or analyzing evidence'),
+(8, 'Acrobatics', 'Maintaining balance, escaping restraints, or performing flips.'),
+(9, 'Intimidation', 'Using threats to coerce NPCs.'),
+(10, 'Survival', 'Tracking enemies, foraging for food, or avoiding natural hazards');

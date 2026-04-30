@@ -90,12 +90,3 @@ CREATE TABLE IF NOT EXISTS skills (
         REFERENCES characters(id)
         ON DELETE CASCADE
 );
-
-SELECT * FROM characters;
-SELECT * FROM stats;
-SELECT * FROM spells;
-SELECT * FROM items;
-SELECT * FROM npcs;
-SELECT * FROM spells_learned;
-SELECT * FROM inventory;
-SELECT * FROM quests;

@@ -7,6 +7,10 @@ def char_menu(connection):
     print("1. Add Character")
     print("2. Update Character")
     print("3. Delete Character")
+    print("4. Add Skill")
+    print("5. Update Skill")
+    print("6. Delete Skill")
+    print("7. Main Menu")
     select = input("Selection: ")
     
     match select:
@@ -19,6 +23,16 @@ def char_menu(connection):
         case '3':
             id = int(input("Input Character ID: "))
             delete_data(connection, 'characters', id)
+
+        case '4':
+            add_skill(connection)
+
+        case '5':
+            return None
+
+        case '6':
+            id = int(input("Input Skill ID: "))
+            delete_data(connection, 'skills', id)
 
     return None
 
@@ -127,10 +141,10 @@ def item_menu(connection):
 
 def add_character(connection):
     name = input("Name: ")
-    dnd_class = input("Class: ")
+    character_class = input("Class: ")
     level = input("Level: ")
     description = input("Description: ")
-    id = add_data(connection, 'characters (name, class, level, description)', (name, dnd_class, level, description), name, True)
+    id = add_data(connection, 'characters', '(name, character_class, level, description)', (name, character_class, level, description), name, True)
 
     auto = input("\nWould you like to input your statistics or randomize them automatically [manual/auto]: ").lower()
     if auto == "manual":
@@ -140,7 +154,14 @@ def add_character(connection):
         intelligence = int(input("Intelligence: "))
         wisdom = int(input("Wisdom: "))
         charisma = int(input("Charisma: "))
-    add_data(connection, 'stats (character_id, strength, dexterity, constitution, intelligence, wisdom, charisma)', (id, strength, dexterity, constitution, intelligence, wisdom, charisma), name + "'s stats")
+    add_data(connection, 'stats', '(character_id, strength, dexterity, constitution, intelligence, wisdom, charisma)', (id, strength, dexterity, constitution, intelligence, wisdom, charisma), name + "'s stats")
+
+def add_skill(connection):
+    character_id = input("ID of Character with Skill: ")
+    name = input("Name of Skill: ")
+    effect = input("Effect: ")
+    add_data(connection, 'skills', '(character_id, name, effects)', (character_id, name, effect), name)
+    return None
 
 
 def learn_spell(connection):

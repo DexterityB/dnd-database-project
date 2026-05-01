@@ -216,10 +216,6 @@ def inventory(connection):
     add_data(connection, 'inventory (character_id, item_id)', (character_id, item_id), added)
 
 
-def main():
-    print("🗡️  D&D Database Manager 🐉")
-    print("=" * 26)
-    
 def main():    
     connection = create_connection()
     if not connection:

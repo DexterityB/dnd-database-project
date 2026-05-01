@@ -24,17 +24,17 @@ INSERT IGNORE INTO stats (character_id, strength, dexterity, constitution, intel
 (9, 20, 11, 18, 12, 14, 15),
 (10, 8, 17, 11, 15, 13, 19);
 
-INSERT IGNORE INTO spells (name, description, level, damage) VALUES
-('Fireball', 'Explosive burst of fire', 3, '8d6 fire'),
-('Magic Missile', 'Guaranteed arcane bolts', 1, '3d4+3 force'),
-('Heal', 'Restores health to allies', 2, NULL),
-('Lightning Bolt', 'High-voltage strike', 3, '8d6 lightning'),
-('Invisibility', 'Makes caster unseen', 2, NULL),
-('Frost Nova', 'Freezing area blast', 3, '6d6 cold'),
-('Summon Wolf', 'Calls a spirit wolf', 2, NULL),
-('Charm Person', 'Influences humanoid minds', 1, NULL),
-('Meteor Strike', 'Massive celestial impact', 5, '12d10 fire/bludgeoning'),
-('Arcane Shield', 'Protective magical barrier', 2, NULL);
+INSERT IGNORE INTO spells (name, level, damage, description) VALUES
+('Fireball', 3, '8d6 fire', 'Explosive burst of fire'),
+('Magic Missile', 1, '3d4+3 force', 'Guaranteed arcane bolts'),
+('Heal', 2, NULL, 'Restores health to allies'),
+('Lightning Bolt', 3, '8d6 lightning', 'High-voltage strike'),
+('Invisibility', 2, NULL, 'Makes caster unseen'),
+('Frost Nova', 3, '6d6 cold', 'Freezing area blast'),
+('Summon Wolf', 2, NULL, 'Calls a spirit wolf'),
+('Charm Person', 1, NULL, 'Influences humanoid minds'),
+('Meteor Strike', 5, '12d10 fire/bludgeoning', 'Massive celestial impact'),
+('Arcane Shield', 2, NULL, 'Protective magical barrier');
 
 INSERT IGNORE INTO items (name, description, effects) VALUES
 ('Sword of Dawn', 'Holy blade of light', '+5 vs undead'),

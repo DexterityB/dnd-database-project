@@ -25,10 +25,10 @@ CREATE TABLE IF NOT EXISTS stats (
 CREATE TABLE IF NOT EXISTS spells (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
-    description VARCHAR(255),
     level INT,
     -- Use VARCHAR instead of INT due to damage being dice based (ex. d4, 2d6) 
-    damage VARCHAR(50)
+    damage VARCHAR(50),
+    description VARCHAR(255)
 );
 
 CREATE TABLE IF NOT EXISTS items (

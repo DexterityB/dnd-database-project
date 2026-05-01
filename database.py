@@ -60,7 +60,8 @@ def add_data(connection, table, data, added, get_id = False):
         print(f'✅ {added} added to database ✅')
 
         if get_id:
-            cursor.execute("SELECT id, name FROM characters WHERE name = %s", (data[0],))
+            query = f"SELECT id, name FROM {table} WHERE name = " + "%s"
+            cursor.execute(query, (data[0],))
             id = cursor.fetchall()[0][0]
         else:
             id = None
@@ -72,11 +73,30 @@ def add_data(connection, table, data, added, get_id = False):
     finally:
         return id
 
+def update_data(connection, table, rows, data, id_name, updated):
+    '''Update a row of data in the database'''
+    try:
+        cursor = connection.cursor()
+        parameters = []
+        for num in range(len(rows)):
+            parameters.append(rows[num] + ' = %s')
+
+        query = f"UPDATE {table} SET {", ".join(parameters)} WHERE {id_name} = " + "%s"
+        cursor.execute(query, data)
+        connection.commit()
+        print(f'✅ {updated} updated in database ✅')
+
+    except Error as e:
+        print(f'❌ Error: "{e}" ❌')
+        
+    finally:
+        return None
+
 def delete_data(connection, table, id):
     '''Delete a row of data from the database'''
     try:
         cursor = connection.cursor()
-        query = f"DELETE FROM {table} WHERE ID = " + "%s"
+        query = f"DELETE FROM {table} WHERE id = " + "%s"
         cursor.execute(query, (id,))
         connection.commit()
         print('✅ Successfly deleted data from database ✅')

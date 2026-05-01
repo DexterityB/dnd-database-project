@@ -46,7 +46,7 @@ def view_table(connection):
     finally:
         return None
 
-def add_data(connection, table, data, added, get_id = False):
+def add_data(connection, table, rows, data, added, get_id = False):
     '''Add a row of data to the database'''
     try:
         cursor = connection.cursor()
@@ -54,7 +54,7 @@ def add_data(connection, table, data, added, get_id = False):
         for value in data:
             parameters.append('%s')
 
-        query = f"INSERT INTO {table} VALUES ({", ".join(parameters)})"
+        query = f"INSERT INTO {table} {rows} VALUES ({", ".join(parameters)})"
         cursor.execute(query, data)
         connection.commit()
         print(f'✅ {added} added to database ✅')

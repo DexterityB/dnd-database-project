@@ -56,10 +56,10 @@ def quest_menu(connection):
 
 def add_character(connection):
     name = input("Name: ")
-    dnd_class = input("Class: ")
+    character_class = input("Class: ")
     level = input("Level: ")
     description = input("Description: ")
-    id = add_data(connection, 'characters (name, class, level, description)', (name, dnd_class, level, description), name, True)
+    id = add_data(connection, 'characters', '(name, character_class, level, description)', (name, character_class, level, description), name, True)
 
     auto = input("\nWould you like to input your statistics or randomize them automatically [manual/auto]: ").lower()
     if auto == "manual":
@@ -69,13 +69,13 @@ def add_character(connection):
         intelligence = int(input("Intelligence: "))
         wisdom = int(input("Wisdom: "))
         charisma = int(input("Charisma: "))
-    add_data(connection, 'stats (character_id, strength, dexterity, constitution, intelligence, wisdom, charisma)', (id, strength, dexterity, constitution, intelligence, wisdom, charisma), name + "'s stats")
+    add_data(connection, 'stats', '(character_id, strength, dexterity, constitution, intelligence, wisdom, charisma)', (id, strength, dexterity, constitution, intelligence, wisdom, charisma), name + "'s stats")
 
 def add_skill(connection):
     character_id = input("ID of Character with Skill: ")
     name = input("Name of Skill: ")
     effect = input("Effect: ")
-    add_data(connection, 'skills (character_id, name, effects)', (character_id, name, effect), name)
+    add_data(connection, 'skills', '(character_id, name, effects)', (character_id, name, effect), name)
     return None
 
 def main():    

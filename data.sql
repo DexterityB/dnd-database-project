@@ -1,6 +1,6 @@
 USE dnd_database;
 
-INSERT IGNORE INTO characters (name, class, level, description) VALUES
+INSERT IGNORE INTO characters (name, character_class, level, description) VALUES
 ('Aelar Stormwind', 'Wizard', 12, 'Elven archmage of the northern towers'),
 ('Brakus Ironfist', 'Fighter', 10, 'Dwarven arena champion'),
 ('Lyra Moonwhisper', 'Rogue', 8, 'Silent thief from the shadow guild'),

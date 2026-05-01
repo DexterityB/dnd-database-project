@@ -1,10 +1,10 @@
-from database import create_connection, view_table, add_data, delete_data
+from database import create_connection, view_table, add_data, update_data, delete_data
 
 def char_menu(connection):
     print("\n🧙 Character Menu 👑")
     print("=" * 20)
 
-    print("\n1. Add Character")
+    print("1. Add Character")
     print("2. Update Character")
     print("3. Delete Character")
     select = input("Selection: ")
@@ -199,12 +199,16 @@ def main():
     print("🗡️  D&D Database Manager 🐉")
     print("=" * 26)
     
+def main():    
     connection = create_connection()
     if not connection:
         return None
     
     while True:
-        print("\n1. View Table")
+        print("\n🗡️  D&D Database Manager 🐉")
+        print("=" * 26)
+
+        print("1. View Table")
         print("2. Character Menu")
         print("3. Spell Menu")
         print("4. Quest Menu")

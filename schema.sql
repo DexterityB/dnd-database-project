@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS inventory (
 
 CREATE TABLE IF NOT EXISTS quests (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    npc_id INT,
+    npc_id INT NOT NULL,
     objective VARCHAR(255),
     details VARCHAR(255),
     start_date DATE,

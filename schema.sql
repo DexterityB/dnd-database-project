@@ -25,10 +25,10 @@ CREATE TABLE IF NOT EXISTS stats (
 CREATE TABLE IF NOT EXISTS spells (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
-    description VARCHAR(255),
     level INT,
     -- Use VARCHAR instead of INT due to damage being dice based (ex. d4, 2d6) 
-    damage VARCHAR(50)
+    damage VARCHAR(50),
+    description VARCHAR(255)
 );
 
 CREATE TABLE IF NOT EXISTS items (
@@ -46,8 +46,8 @@ CREATE TABLE IF NOT EXISTS npcs (
 
 CREATE TABLE IF NOT EXISTS spells_learned (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    character_id NOT NULL INT,
-    spell_id NOT NULL INT,
+    character_id INT NOT NULL,
+    spell_id INT NOT NULL,
     FOREIGN KEY (character_id) 
         REFERENCES characters(id)
         ON DELETE CASCADE,
@@ -57,8 +57,8 @@ CREATE TABLE IF NOT EXISTS spells_learned (
 );
 
 CREATE TABLE IF NOT EXISTS inventory (
-    character_id NOT NULL INT,
-    item_id NOT NULL INT,
+    character_id INT NOT NULL,
+    item_id INT NOT NULL,
     quantity INT DEFAULT 1,
     PRIMARY KEY (character_id, item_id),
     FOREIGN KEY (character_id) 
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS inventory (
 
 CREATE TABLE IF NOT EXISTS quests (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    npc_id NOT NULL INT,
+    npc_id INT,
     objective VARCHAR(255),
     details VARCHAR(255),
     start_date DATE,
@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS quests (
 
 CREATE TABLE IF NOT EXISTS skills (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    character_id NOT NULL INT,
+    character_id INT NOT NULL,
     name VARCHAR(50) NOT NULL,
     effects VARCHAR(255),
     FOREIGN KEY (character_id) 

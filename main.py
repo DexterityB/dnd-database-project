@@ -27,17 +27,102 @@ def char_menu(connection):
 def spell_menu(connection):
     print("\n🪄  Spell Menu 📜")
     print("=" * 16)
-    return None
+    
+    print("\n1. Add Spell")
+    print("2. Learn Spell")
+    print("2. Update Spell")
+    print("4. Delete Spell")
+    select = input("Selection: ")
+    
+    match select:
+        case '1':
+            add_spell(connection)
 
+        case '2':
+            learn_spell(connection)
+
+        case '2':
+            return None
+        
+        case '4':
+            id = int(input("Input Spell ID: "))
+            delete_data(connection, 'spells', id)
+
+    return None
 
 
 
 def quest_menu(connection):
     print("\n🧭 Quest Menu 🗺️")
     print("=" * 16)
+
+    print("\n1. Add Quest")
+    print("2. Update Quest")
+    print("3. Delete Quest")
+    select = input("Selection: ")
+
+    match select:
+        case '1':
+            add_quest(connection)
+
+        case '2':
+            return None
+
+        case '3':
+            id = int(input("Input Character ID: "))
+            delete_data(connection, 'characters', id)
+
     return None
 
 
+def npc_menu(connection):
+    print("\n👤 Npc Menu 💬")
+    print("=" * 14)
+
+    print("\n1. Add Npc")
+    print("2. Update Npc")
+    print("3. Delete Npc")
+    select = input("Selection: ")
+
+    match select:
+        case '1':
+            add_npc(connection)
+
+        case '2':
+            return None
+
+        case '3':
+            id = int(input("Input Npc ID: "))
+            delete_data(connection, 'npcs', id)
+
+    return None
+
+
+def item_menu(connection):
+    print("📦 Item Menu 🎒")
+    print("=" * 15)
+
+    print("\n1. Add Item")
+    print("2. Player Inventory")
+    print("3. Update Item")
+    print("4. Delete Item")
+    select = input("Selection: ")
+
+    match select:
+        case '1':
+            add_item(connection)
+
+        case '2':
+            inventory(connection)
+
+        case '3':
+            return None
+
+        case '4':
+            id = int(input("Input Item ID: "))
+            delete_data(connection, 'item', id)
+
+    return None
 
 
 def add_character(connection):
@@ -57,6 +142,63 @@ def add_character(connection):
         charisma = int(input("Charisma: "))
     add_data(connection, 'stats (character_id, strength, dexterity, constitution, intelligence, wisdom, charisma)', (id, strength, dexterity, constitution, intelligence, wisdom, charisma), name + "'s stats")
 
+
+def learn_spell(connection):
+    character_id = input("Character Id: ")
+    spell_id = input("Spell Id: ")
+    spell_name = input("Spell Name: ")
+    character_name = input("Character Name: ")
+    added = spell_name + " spell to " + character_name + " character"
+    add_data(connection, 'spells_learned (character_id, spell_id)', (character_id, spell_id), added)
+
+def add_spell(connection):
+    name = input("Name: ")
+    level = input("Level: ")
+    damage = input("Damage (If Applicable): ")
+    description = input("Description: ")
+    add_data(connection, 'spells (name, level, damage, description)', (name, level, damage, description), name)
+
+
+def add_quest(connection):
+    npc_id = input("Npc Id: ")
+    if npc_id == "":
+        npc_id = None
+    objective = input("Objective: ")
+    details = input("Details: ")
+    start_date = input("Start Date (YYYY-MM-DD or blank): ")
+    completion_date = input("Completion Date (YYYY-MM-DD or blank): ")
+    if completion_date == "":
+        completion_date = None
+    rewards = input("Rewards: ")
+    add_data(connection, 'quests (npc_id, objective, details, start_date, completion_date, rewards)', (npc_id, objective, details, start_date, completion_date, rewards), objective)
+
+
+def add_npc(connection):
+    name = input("Name: ")
+    description = input("Description: ")
+    add_data(connection, 'npcs (name, description)', (name, description), name)
+
+
+def add_item(connection):
+    name = input("Name: ")
+    description = input("Description: ")
+    effects = input("Effects: ")
+    add_data(connection, 'items (name, description, effects)', (name, description, effects), name)
+
+
+def inventory(connection):
+    character_id = input("Character Id: ")
+    item_id = input("Item Id: ")
+    item_name = input("Item Name: ")
+    character_name = input("Character Name: ")
+    added = item_name + " item to " + character_name + " character"
+    add_data(connection, 'inventory (character_id, item_id)', (character_id, item_id), added)
+
+
+def main():
+    print("🗡️  D&D Database Manager 🐉")
+    print("=" * 26)
+    
 def main():    
     connection = create_connection()
     if not connection:
@@ -70,7 +212,9 @@ def main():
         print("2. Character Menu")
         print("3. Spell Menu")
         print("4. Quest Menu")
-        print("5. Exit")
+        print("5. Npc Menu")
+        print("6. Item Menu")
+        print("7. Exit")
         select = input("Selection: ")
         
         match select:
@@ -87,6 +231,12 @@ def main():
                 quest_menu(connection)
 
             case '5':
+                npc_menu(connection)
+
+            case '6':
+                item_menu(connection)
+
+            case '7':
                 break
     
     connection.close()

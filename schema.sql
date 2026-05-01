@@ -4,19 +4,19 @@ USE dnd_database;
 CREATE TABLE IF NOT EXISTS characters (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
-    class VARCHAR(50),
+    character_class VARCHAR(50),
     level INT,
     description VARCHAR(255)
 );
 
 CREATE TABLE IF NOT EXISTS stats (
     character_id INT PRIMARY KEY,
-    strength INT,
-    dexterity INT,
-    constitution INT,
-    intelligence INT,
-    wisdom INT,
-    charisma INT,
+    strength INT CHECK (strength >= 1 AND strength <= 20),
+    dexterity INT CHECK (dexterity >= 1 AND dexterity <= 20),
+    constitution INT CHECK (constitution >= 1 AND constitution <= 20),
+    intelligence INT CHECK (intelligence >= 1 AND intelligence <= 20),
+    wisdom INT CHECK (wisdom >= 1 AND wisdom <= 20),
+    charisma INT CHECK (charisma >= 1 AND charisma <= 20),
     FOREIGN KEY (character_id) 
         REFERENCES characters(id)
         ON DELETE CASCADE
@@ -46,8 +46,8 @@ CREATE TABLE IF NOT EXISTS npcs (
 
 CREATE TABLE IF NOT EXISTS spells_learned (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    character_id INT,
-    spell_id INT,
+    character_id NOT NULL INT,
+    spell_id NOT NULL INT,
     FOREIGN KEY (character_id) 
         REFERENCES characters(id)
         ON DELETE CASCADE,
@@ -57,10 +57,10 @@ CREATE TABLE IF NOT EXISTS spells_learned (
 );
 
 CREATE TABLE IF NOT EXISTS inventory (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    character_id INT,
-    item_id INT,
-    quantity INT,
+    character_id NOT NULL INT,
+    item_id NOT NULL INT,
+    quantity INT DEFAULT 1,
+    PRIMARY KEY (character_id, item_id),
     FOREIGN KEY (character_id) 
         REFERENCES characters(id)
         ON DELETE CASCADE,
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS inventory (
 
 CREATE TABLE IF NOT EXISTS quests (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    npc_id INT,
+    npc_id NOT NULL INT,
     objective VARCHAR(255),
     details VARCHAR(255),
     start_date DATE,
@@ -83,19 +83,11 @@ CREATE TABLE IF NOT EXISTS quests (
 );
 
 CREATE TABLE IF NOT EXISTS skills (
-    character_id INT,
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    character_id NOT NULL INT,
     name VARCHAR(50) NOT NULL,
     effects VARCHAR(255),
     FOREIGN KEY (character_id) 
         REFERENCES characters(id)
         ON DELETE CASCADE
 );
-
-SELECT * FROM characters;
-SELECT * FROM stats;
-SELECT * FROM spells;
-SELECT * FROM items;
-SELECT * FROM npcs;
-SELECT * FROM spells_learned;
-SELECT * FROM inventory;
-SELECT * FROM quests;

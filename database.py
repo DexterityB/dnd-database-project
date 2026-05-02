@@ -118,7 +118,7 @@ def update_data(connection, table, rows, data, id_name, updated):
         cursor = connection.cursor()
         parameters = [f"{row} = %s" for row in rows]
 
-        query = f"UPDATE {table} SET {', '.join(parameters)} WHERE {id_name} = %s"
+        query = f"UPDATE {table} SET {', '.join(parameters)} WHERE {id_name} = " + "%s"
         cursor.execute(query, data)
         connection.commit()
         print(f'✅ {updated} updated in database ✅')

@@ -18,7 +18,7 @@ def char_menu(connection):
             add_character(connection)
 
         case '2':
-            return None
+            update_character(connection)
 
         case '3':
             id = int(input("Input Character ID: "))
@@ -28,15 +28,13 @@ def char_menu(connection):
             add_skill(connection)
 
         case '5':
-            return None
+            update_skill(connection)
 
         case '6':
             id = int(input("Input Skill ID: "))
             delete_data(connection, 'skills', id)
 
     return None
-
-
 
 def spell_menu(connection):
     print("\n🪄  Spell Menu 📜")
@@ -56,15 +54,13 @@ def spell_menu(connection):
             learn_spell(connection)
 
         case '2':
-            return None
+            update_spell(connection)
         
         case '4':
             id = int(input("Input Spell ID: "))
             delete_data(connection, 'spells', id)
 
     return None
-
-
 
 def quest_menu(connection):
     print("\n🧭 Quest Menu 🗺️")
@@ -80,14 +76,13 @@ def quest_menu(connection):
             add_quest(connection)
 
         case '2':
-            return None
+            update_quest(connection)
 
         case '3':
             id = int(input("Input Character ID: "))
             delete_data(connection, 'characters', id)
 
     return None
-
 
 def npc_menu(connection):
     print("\n👤 Npc Menu 💬")
@@ -103,7 +98,7 @@ def npc_menu(connection):
             add_npc(connection)
 
         case '2':
-            return None
+            update_npc(connection)
 
         case '3':
             id = int(input("Input Npc ID: "))
@@ -130,7 +125,7 @@ def item_menu(connection):
             inventory(connection)
 
         case '3':
-            return None
+            update_item(connection)
 
         case '4':
             id = int(input("Input Item ID: "))
@@ -156,6 +151,15 @@ def add_character(connection):
         charisma = int(input("Charisma: "))
     add_data(connection, 'stats', '(character_id, strength, dexterity, constitution, intelligence, wisdom, charisma)', (id, strength, dexterity, constitution, intelligence, wisdom, charisma), name + "'s stats")
 
+def update_character(connection):
+    id = input("ID of Character: ")
+    name = input("New Name: ")
+    character_class = input("New Class: ")
+    level = input("New Level: ")
+    description = input("New Description: ")
+    update_data(connection, 'characters', ('name', 'character_class', 'level', 'description'), (name, character_class, level, description, id), 'id', name)
+    return None
+
 def add_skill(connection):
     character_id = input("ID of Character with Skill: ")
     name = input("Name of Skill: ")
@@ -163,6 +167,13 @@ def add_skill(connection):
     add_data(connection, 'skills', '(character_id, name, effects)', (character_id, name, effect), name)
     return None
 
+def update_skill(connection):
+    id = input("ID of Skill: ")
+    character_id = input("New ID of Character with Skill: ")
+    name = input("New Name of Skill: ")
+    effect = input("New Effect: ")
+    update_data(connection, 'skills', ('character_id', 'name', 'effects'), (character_id, name, effect, id), 'id', name)
+    return None
 
 def learn_spell(connection):
     character_id = input("Character Id: ")
@@ -179,6 +190,14 @@ def add_spell(connection):
     description = input("Description: ")
     add_data(connection, 'spells (name, level, damage, description)', (name, level, damage, description), name)
 
+def update_spell(connection):
+    id = input("ID of Spell: ")
+    name = input("New Name: ")
+    level = input("New Level: ")
+    damage = input("New Damage (If Applicable): ")
+    description = input("New Description: ")
+    update_data(connection, 'spells', ('name', 'level', 'damage', 'description'), (name, level, damage, description, id), 'id', name)
+    return None
 
 def add_quest(connection):
     npc_id = input("Npc Id: ")
@@ -193,12 +212,31 @@ def add_quest(connection):
     rewards = input("Rewards: ")
     add_data(connection, 'quests (npc_id, objective, details, start_date, completion_date, rewards)', (npc_id, objective, details, start_date, completion_date, rewards), objective)
 
+def update_quest(connection):
+    id = input("ID of Quest: ")
+    npc_id = input("New Npc Id: ")
+    if npc_id == "":
+        npc_id = None
+    objective = input("New Objective: ")
+    details = input("New Details: ")
+    start_date = input("New Start Date (YYYY-MM-DD or blank): ")
+    completion_date = input("New Completion Date (YYYY-MM-DD or blank): ")
+    if completion_date == "":
+        completion_date = None
+    update_data(connection, 'quests', ('npc_id', 'objective', 'details', 'start_date', 'completion_date', 'rewards'), (npc_id, objective, details, start_date, completion_date, rewards, id), 'id', objective)
+    return None
 
 def add_npc(connection):
     name = input("Name: ")
     description = input("Description: ")
     add_data(connection, 'npcs (name, description)', (name, description), name)
 
+def update_npc(connection):
+    id = input("ID of NPC: ")
+    name = input("New Name: ")
+    description = input("New Description: ")
+    update_data(connection, 'npcs', ('name', 'description'), (name, description, id), 'id', name)
+    return None
 
 def add_item(connection):
     name = input("Name: ")
@@ -206,6 +244,13 @@ def add_item(connection):
     effects = input("Effects: ")
     add_data(connection, 'items (name, description, effects)', (name, description, effects), name)
 
+def update_item(connection):
+    id = input("ID of Item: ")
+    name = input("New Name: ")
+    description = input("New Description: ")
+    effects = input("New Effects: ")
+    update_data(connection, 'items', ('name', 'description', 'effects'), (name, description, effects, id), 'id', name)
+    return None
 
 def inventory(connection):
     character_id = input("Character Id: ")
@@ -214,7 +259,6 @@ def inventory(connection):
     character_name = input("Character Name: ")
     added = item_name + " item to " + character_name + " character"
     add_data(connection, 'inventory (character_id, item_id)', (character_id, item_id), added)
-
 
 def main():    
     connection = create_connection()

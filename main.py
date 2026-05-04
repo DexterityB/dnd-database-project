@@ -1,5 +1,14 @@
 from database import create_connection, view_table, add_data, update_data, delete_data
 
+def option(options, choice):
+    while True:
+        if choice in options:
+            return choice
+        else:
+            print("Answer not in options")
+            print(f"Options: {options}")
+            choice = input("Selection: ")
+
 def char_menu(connection):
     print("\n🧙 Character Menu 👑")
     print("=" * 20)
@@ -12,6 +21,7 @@ def char_menu(connection):
     print("6. Delete Skill")
     print("7. Main Menu")
     select = input("Selection: ")
+    select = option(['1', '2', '3', '4', '5', '6', '7'], select)
     
     match select:
         case '1':
@@ -44,7 +54,9 @@ def spell_menu(connection):
     print("2. Learn Spell")
     print("2. Update Spell")
     print("4. Delete Spell")
+    print("5. Main Menu")
     select = input("Selection: ")
+    select = option(['1', '2', '3', '4', '5'], select)
     
     match select:
         case '1':
@@ -69,7 +81,9 @@ def quest_menu(connection):
     print("\n1. Add Quest")
     print("2. Update Quest")
     print("3. Delete Quest")
+    print("4. Main Menu")
     select = input("Selection: ")
+    select = option(['1', '2', '3', '4'], select)
 
     match select:
         case '1':
@@ -91,7 +105,9 @@ def npc_menu(connection):
     print("\n1. Add Npc")
     print("2. Update Npc")
     print("3. Delete Npc")
+    print("4. Main Menu")
     select = input("Selection: ")
+    select = option(['1', '2', '3', '4'], select)
 
     match select:
         case '1':
@@ -115,7 +131,9 @@ def item_menu(connection):
     print("2. Player Inventory")
     print("3. Update Item")
     print("4. Delete Item")
+    print("5. Main Menu")
     select = input("Selection: ")
+    select = option(['1', '2', '3', '4', '5'], select)
 
     match select:
         case '1':
@@ -181,14 +199,14 @@ def learn_spell(connection):
     spell_name = input("Spell Name: ")
     character_name = input("Character Name: ")
     added = spell_name + " spell to " + character_name + " character"
-    add_data(connection, 'spells_learned (character_id, spell_id)', (character_id, spell_id), added)
+    add_data(connection, 'spells_learned', '(character_id, spell_id)', (character_id, spell_id), added)
 
 def add_spell(connection):
     name = input("Name: ")
     level = input("Level: ")
     damage = input("Damage (If Applicable): ")
     description = input("Description: ")
-    add_data(connection, 'spells (name, level, damage, description)', (name, level, damage, description), name)
+    add_data(connection, 'spells', '(name, level, damage, description)', (name, level, damage, description), name)
 
 def update_spell(connection):
     id = input("ID of Spell: ")
@@ -210,7 +228,7 @@ def add_quest(connection):
     if completion_date == "":
         completion_date = None
     rewards = input("Rewards: ")
-    add_data(connection, 'quests (npc_id, objective, details, start_date, completion_date, rewards)', (npc_id, objective, details, start_date, completion_date, rewards), objective)
+    add_data(connection, 'quests', '(npc_id, objective, details, start_date, completion_date, rewards)', (npc_id, objective, details, start_date, completion_date, rewards), objective)
 
 def update_quest(connection):
     id = input("ID of Quest: ")
@@ -229,7 +247,7 @@ def update_quest(connection):
 def add_npc(connection):
     name = input("Name: ")
     description = input("Description: ")
-    add_data(connection, 'npcs (name, description)', (name, description), name)
+    add_data(connection, 'npcs', '(name, description)', (name, description), name)
 
 def update_npc(connection):
     id = input("ID of NPC: ")
@@ -242,7 +260,7 @@ def add_item(connection):
     name = input("Name: ")
     description = input("Description: ")
     effects = input("Effects: ")
-    add_data(connection, 'items (name, description, effects)', (name, description, effects), name)
+    add_data(connection, 'items', '(name, description, effects)', (name, description, effects), name)
 
 def update_item(connection):
     id = input("ID of Item: ")
@@ -258,7 +276,7 @@ def inventory(connection):
     item_name = input("Item Name: ")
     character_name = input("Character Name: ")
     added = item_name + " item to " + character_name + " character"
-    add_data(connection, 'inventory (character_id, item_id)', (character_id, item_id), added)
+    add_data(connection, 'inventory', '(character_id, item_id)', (character_id, item_id), added)
 
 def main():    
     connection = create_connection()
@@ -277,6 +295,7 @@ def main():
         print("6. Item Menu")
         print("7. Exit")
         select = input("Selection: ")
+        select = option(['1', '2', '3', '4', '5', '6', '7'], select)
         
         match select:
             case '1':

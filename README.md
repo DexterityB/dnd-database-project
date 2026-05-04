@@ -4,7 +4,9 @@ The D&D database is a database that can store a bunch of information for your D&
 
 ## ERD
 
-Our ERD is on my computer at Warren Tech central, and we didn't attach the screenshot. It will be attached on Monday.
+![Image showing the ERD](screenshots/erd1.png)
+![Image showing the code for the ERD](screenshots/erd2.png)
+
 
 ## Installation
 ``` bash

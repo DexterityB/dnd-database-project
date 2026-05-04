@@ -181,14 +181,14 @@ def learn_spell(connection):
     spell_name = input("Spell Name: ")
     character_name = input("Character Name: ")
     added = spell_name + " spell to " + character_name + " character"
-    add_data(connection, 'spells_learned (character_id, spell_id)', (character_id, spell_id), added)
+    add_data(connection, 'spells_learned', '(character_id, spell_id)', (character_id, spell_id), added)
 
 def add_spell(connection):
     name = input("Name: ")
     level = input("Level: ")
     damage = input("Damage (If Applicable): ")
     description = input("Description: ")
-    add_data(connection, 'spells (name, level, damage, description)', (name, level, damage, description), name)
+    add_data(connection, 'spells', '(name, level, damage, description)', (name, level, damage, description), name)
 
 def update_spell(connection):
     id = input("ID of Spell: ")
@@ -210,7 +210,7 @@ def add_quest(connection):
     if completion_date == "":
         completion_date = None
     rewards = input("Rewards: ")
-    add_data(connection, 'quests (npc_id, objective, details, start_date, completion_date, rewards)', (npc_id, objective, details, start_date, completion_date, rewards), objective)
+    add_data(connection, 'quests', '(npc_id, objective, details, start_date, completion_date, rewards)', (npc_id, objective, details, start_date, completion_date, rewards), objective)
 
 def update_quest(connection):
     id = input("ID of Quest: ")
@@ -229,7 +229,7 @@ def update_quest(connection):
 def add_npc(connection):
     name = input("Name: ")
     description = input("Description: ")
-    add_data(connection, 'npcs (name, description)', (name, description), name)
+    add_data(connection, 'npcs', '(name, description)', (name, description), name)
 
 def update_npc(connection):
     id = input("ID of NPC: ")
@@ -242,7 +242,7 @@ def add_item(connection):
     name = input("Name: ")
     description = input("Description: ")
     effects = input("Effects: ")
-    add_data(connection, 'items (name, description, effects)', (name, description, effects), name)
+    add_data(connection, 'items', '(name, description, effects)', (name, description, effects), name)
 
 def update_item(connection):
     id = input("ID of Item: ")
@@ -258,7 +258,7 @@ def inventory(connection):
     item_name = input("Item Name: ")
     character_name = input("Character Name: ")
     added = item_name + " item to " + character_name + " character"
-    add_data(connection, 'inventory (character_id, item_id)', (character_id, item_id), added)
+    add_data(connection, 'inventory', '(character_id, item_id)', (character_id, item_id), added)
 
 def main():    
     connection = create_connection()

@@ -1,5 +1,14 @@
 from database import create_connection, view_table, add_data, update_data, delete_data
 
+def option(options, choice):
+    while True:
+        if choice in options:
+            return choice
+        else:
+            print("Answer not in options")
+            print(f"Options: {options}")
+            choice = input("Selection: ")
+
 def char_menu(connection):
     print("\n🧙 Character Menu 👑")
     print("=" * 20)
@@ -12,6 +21,7 @@ def char_menu(connection):
     print("6. Delete Skill")
     print("7. Main Menu")
     select = input("Selection: ")
+    select = option(['1', '2', '3', '4', '5', '6', '7'], select)
     
     match select:
         case '1':
@@ -44,7 +54,9 @@ def spell_menu(connection):
     print("2. Learn Spell")
     print("2. Update Spell")
     print("4. Delete Spell")
+    print("5. Main Menu")
     select = input("Selection: ")
+    select = option(['1', '2', '3', '4', '5'], select)
     
     match select:
         case '1':
@@ -69,7 +81,9 @@ def quest_menu(connection):
     print("\n1. Add Quest")
     print("2. Update Quest")
     print("3. Delete Quest")
+    print("4. Main Menu")
     select = input("Selection: ")
+    select = option(['1', '2', '3', '4'], select)
 
     match select:
         case '1':
@@ -91,7 +105,9 @@ def npc_menu(connection):
     print("\n1. Add Npc")
     print("2. Update Npc")
     print("3. Delete Npc")
+    print("4. Main Menu")
     select = input("Selection: ")
+    select = option(['1', '2', '3', '4'], select)
 
     match select:
         case '1':
@@ -115,7 +131,9 @@ def item_menu(connection):
     print("2. Player Inventory")
     print("3. Update Item")
     print("4. Delete Item")
+    print("5. Main Menu")
     select = input("Selection: ")
+    select = option(['1', '2', '3', '4', '5'], select)
 
     match select:
         case '1':
@@ -277,6 +295,7 @@ def main():
         print("6. Item Menu")
         print("7. Exit")
         select = input("Selection: ")
+        select = option(['1', '2', '3', '4', '5', '6', '7'], select)
         
         match select:
             case '1':

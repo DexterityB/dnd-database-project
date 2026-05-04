@@ -2,7 +2,6 @@ import mysql.connector
 from mysql.connector import Error
 from tabulate import tabulate
 
-
 def is_valid_table(connection, table):
     cursor = connection.cursor()
     cursor.execute("SHOW TABLES")

@@ -149,3 +149,8 @@ The main limitation for the database is that when updating data, you have to upd
 
 ## Reflection
 
+Throughout the design process of this project, we learned a lot about using databases and the database mangager in python. During the design of our database, we learned how to a more complex database than we've designed before, with more tables, where all of the tables interact. We also learned about truncate commands and resetting auto incrementing IDs, although we didn't end up implementing that in our final project.
+
+During the construction of our python programs, we learned about utilizing different functions to better organize our design, allowing us to not just have a bunch of spaghetti code. While we have done this in the past, this project was a lot bigger than a lot of previous projects, which is why we used this method as much as we did. In addition, we also utilized try except functions a lot more than we previously have.
+
+For the interaction between our python application and our SQL database, we learned more about parameterized queries, and what parts of SQL queries can be parameterized. For example, we weren't able to use the '%s' to input table or column names into the queries, but could prevent SQL injection using other error handling methods. We also were able to use different methods in our database file to use a small number of functions, like calculating different numbers of '%s' required and then inputting them into the query.
